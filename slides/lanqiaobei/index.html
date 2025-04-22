@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html class="h-100">
+  <head>
+    <base target="_blank" />
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <link href="/static/css/tailwind.min.css" rel="stylesheet" />
+    <link href="/static/css/base.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/plugin/highlight/monokai.css" />
+    <link
+      href="https://fonts.font.im/css?family=Source+Serif+Pro%7CLato%7CInconsolata"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+    <title>蓝桥杯经验分享</title>
+    <style>
+      .font-sans {
+        font-family: "Lato", "SimHei", "STHeiti", "SimHei", "Serif";
+      }
+      .font-serif {
+        font-family: "Source Serif Pro", "Songti SC", "SimSun", "Serif", serif;
+      }
+    </style>
+    <link rel="stylesheet" href="/static/katex/katex.min.css" />
+    <script defer src="/static/katex/katex.min.js"></script>
+    <script
+      defer
+      src="/static/katex/auto-render.min.js"
+      integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          // customised options
+          // &#8226; auto-render specific keys, e.g.:
+          delimiters: [
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true },
+          ],
+          // &#8226; rendering keys, e.g.:
+          throwOnError: false,
+        });
+      });
+    </script>
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <link rel="stylesheet" href="/static/reveal/reveal.css" />
+    <link rel="stylesheet" href="/static/reveal/theme/simple.css" id="theme" />
+
+    <style>
+      .reveal .slide-number {
+        font-size: 26px;
+        border-radius: 5px;
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+
+      .reveal .slides {
+        border: 1.5px #ddd solid;
+        border-radius: 7px;
+        text-align: left;
+        font-weight: 300;
+      }
+
+      .reveal h1,
+      .reveal h2,
+      .reveal h3,
+      .reveal h4 {
+        font-family: "Lato", "SimHei", "STXihei", "Sans Serif";
+        font-weight: 400;
+      }
+
+      .reveal p,
+      .reveal li,
+      .reveal center {
+        font-size: 32px;
+        font-family: "Lato", "STHeiti", "SimHei", "Sans Serif";
+      }
+
+      .reveal li + li {
+        margin-top: 10px;
+      }
+
+      .reveal ul {
+        display: block;
+        margin-right: 15px;
+      }
+
+      .reveal p,
+      .reveal h1,
+      .reveal h2,
+      .reveal h3,
+      .reveal h4,
+      .reveal h5 {
+        padding: 0 25px 0 25px;
+      }
+
+      .reveal table {
+        font-size: 32px;
+        font-family: "Lato", "STHeiti", "SimHei", "Sans Serif";
+        margin-top: 15px;
+        margin-bottom: 15px;
+      }
+
+      .reveal th {
+        background-color: #eee;
+      }
+
+      .reveal tr:nth-child(even) {
+        background-color: #efffff;
+      }
+
+      .reveal h1,
+      .reveal h2,
+      .reveal h3,
+      .reveal h4,
+      .reveal h5,
+      .reveal h6 {
+        text-align: left;
+        margin: 0 0 20px 0;
+        color: #222;
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: normal;
+      }
+
+      .reveal h1 {
+        margin: 0 10 0 10;
+        font-size: 60px;
+      }
+      .reveal .middle h1 {
+        text-align: center;
+      }
+
+      .reveal h2 {
+        font-size: 48px;
+        /* border-bottom: 2px solid rgb(106, 0, 95); */
+        border-bottom: 2px solid rgb(2, 125, 225);
+        padding-bottom: 5px;
+        padding-top: 20px;
+      }
+      .reveal h3 {
+        font-size: 1.15em;
+      }
+      .reveal h4 {
+        font-size: 1.05em;
+      }
+
+      .reveal .center {
+        text-align: center;
+      }
+
+      .reveal .middle {
+        height: 728px;
+        display: flex;
+        align-items: center;
+        width: 100%;
+      }
+
+      .reveal pre {
+        font-size: 28px;
+
+        background-color: #eee;
+
+        border-radius: 3mm;
+        padding: 10px 10px 10px 10px;
+      }
+
+      .reveal pre code {
+        max-height: none;
+      }
+
+      .reveal code {
+        font-family: "Inconsolata", "STKaiti", "KaiTi", "Sans Serif", Monospace;
+      }
+
+      .reveal .middle blockquote {
+        text-align: center;
+        color: rgb(106, 0, 95);
+        background: none;
+        box-shadow: none;
+      }
+
+      .reveal .middle blockquote a {
+        color: inherit;
+      }
+
+      .reveal blockquote p,
+      .reveal blockquote li {
+        font-family: "Lato", "STKaiti", "KaiTi", "Sans Serif";
+      }
+
+      section .center {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .reveal .author-block {
+        margin: 75px 0 35px 0;
+      }
+      .reveal .author-affiliation img {
+        margin: 15px 0 0 0;
+      }
+      .reveal .author-block p,
+      .reveal .author-affiliation p {
+        font-family: "Kaiti", "STKaiti", "Serif", "Times", "Times New Roman";
+        margin-block-start: 0em;
+        margin-block-end: 0em;
+      }
+      .reveal .author-affiliation {
+        display: inline-block;
+        font-size: 90%;
+      }
+      .reveal hr {
+        border: 10px solid rgba(0, 0, 0, 0);
+      }
+      .reveal li {
+        margin-top: 10px;
+        margin-left: 2rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <!-- 封面 -->
+          <div>
+            <div class="center middle">
+              <div style="width: 100%">
+                <h1 id="_1">蓝桥杯经验分享</h1>
+                <p class="font-serif my-1">
+                  <include src="Slides_Author"></include>
+                </p>
+                <div style="position: relative; top: 4rem">
+                  <div style="padding-top: 2rem; padding-bottom: 2rem">
+                    <p class="font-serif my-1">
+                      21级计算机科学与技术&emsp;茅文俊
+                    </p>
+                  </div>
+                  <div class="author-affiliation">
+                    <img
+                      src="https://tse4-mm.cn.bing.net/th/id/OIP-C.8UfkC6eEQa1jWBEvQdYW9QHaDZ?pid=ImgDet&rs=1"
+                      style="display: inline-block; width: 60%; height: auto"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section>
+          <!-- 关于程序设计竞赛(蓝桥杯) -->
+          <section>
+            <div>
+              <div class="center middle">
+                <div style="width: 100%">
+                  <h1 id="_1" class="text-2xl mt-2 font-sans">
+                    关于程序设计竞赛(蓝桥杯)
+                  </h1>
+                  <h1 id="_1" class="text-2xl mt-2 font-sans">
+                    <del>你所需要知道的几大真相</del>
+                  </h1>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section data-markdown>
+            <!--赛制+常见竞赛-->
+            <textarea data-template>
+							## 赛制 + 常见竞赛
+
+							1. ACM赛制 <span>&#10145; ICPC、CCPC</span> <red>难度较高！</red>
+								* 代码评测结果反馈：AC、WA、TLE、MLE、PE...
+								* 无限提交机会
+								* 只有 0分 与 100分，无部分分
+
+							2. IOI赛制 <span>&#10145; CSP认证</span>
+								* 多次机会提交
+								* 实时分数呈现
+
+							2. OI赛制 <span>&#10145;蓝桥杯 &#9989;</span>
+								* <red>一次提交机会</red>
+								* <red>每道题有多测试点分数</red>
+						</textarea
+            >
+          </section>
+
+          <section data-markdown>
+            <!--程序设计语言的选择-->
+            <textarea data-template>
+							## 程序设计语言的选择
+							
+							<img src="/slides/lanqiaobei/img/CPP.png" width="220px" style="position:absolute;right:20%;">
+
+							1.   Java 
+							
+							2.   Python 
+							
+							3.   C/C++ <span>&#9989;</span>
+							* 优势
+								* 性能相对更为优秀
+								* 完善的数据结构与算法库（STL）
+								* 大一学习过【C语言程序与设计】<del>相信大家都有好好学</del>
+							
+							* 劣势
+								* 参赛人数较多
+								* 算法竞赛大佬云集
+						</textarea
+            >
+          </section>
+
+          <section data-markdown>
+            <!--复杂度-->
+            <textarea data-template>
+							## 复杂度
+
+							时间复杂度
+
+							*   一般时间限制为 1s，大约频次为 1E8 - 4E8 左右
+							*   [由数据范围反推算法复杂度以及算法内容 - Acwing](https://www.acwing.com/blog/content/32/)
+
+							空间复杂度
+
+							*   一般题目不会考察，但不排除有<del>毒瘤题</del>卡空间
+							<img class="center" src="/slides/lanqiaobei/img/TLEWA.jpg" width="350px">
+						</textarea
+            >
+          </section>
+
+          <section data-markdown>
+            <!--算法竞赛和C语言练习题的区别-->
+            <textarea data-template>
+							## 算法竞赛和C语言练习题的区别
+							1. 题面描述
+							<div class="center">
+								<img class="inline" width="330px" src="/slides/lanqiaobei/img/C1.png"> 
+								&emsp;&emsp; vs &emsp;&emsp;
+								<img class="inline" width="330px" src="/slides/lanqiaobei/img/js.jpg">
+							</div>
+
+							2. 抽象与建模
+							* 一道平平无奇的数字序列题，或许正解是图论的某个算法。
+							* [build-a-matrix-with-conditions](https://leetcode.cn/problems/build-a-matrix-with-conditions/)
+						</textarea
+            >
+          </section>
+        </section>
+
+        <section>
+          <!-- 修行篇 -->
+          <section>
+            <div>
+              <div class="center middle">
+                <div style="width: 100%">
+                  <h1 id="_1" class="text-2xl mt-2 font-sans">修行篇</h1>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section data-markdown>
+            <!--新手村-->
+            <textarea data-template>
+							## 新手村
+							> 同学A：我只会 C语言，不会 C++，甚至 C语言 都没学好，还能不能参加程序设计竞赛?
+							<div class="fragment">
+								
+							在正式学习算法之前，扎实的语言基础是必须的！
+
+							* <code>C++ = C + STL</code>（在算法竞赛中）
+
+							> STL 是 C++ 支持的一个标准模板库，里面有现成的各种数据结构和算法模板，例如：栈、队列、排序......
+
+							* 实践<code> >> </code> 看书（面向书本编程 <span>&#10060;<span>&emsp;面向IDE编程<span>&#9989;</span>）
+							* 推荐资源<span>&#11015;</span><span>&#11015;</span><span>&#11015;</span>
+							     * [洛谷官方题单](https://www.luogu.com.cn/training/list)
+								 * [杭电入门100题](http://acm.hdu.edu.cn/listproblem.php?vol=11)
+							</div>
+						</textarea
+            >
+          </section>
+
+          <section data-markdown>
+            <!--开始修炼-->
+            <textarea data-template>
+							## 修炼之路
+
+							**『备赛日常 = 学习算法 + 自主刷题 + 打比赛』**
+							
+							1. **完善算法知识体系**
+							* 这将是你解题的工具（一切的基础）
+							* 扩展解题思路，<red>提升思维能力</red>
+							
+							[Improving efficiently: beyond "just solve more problems"?](https://codeforces.com/blog/entry/66715?#comment-507869)
+
+							2. **提高对算法的理解与应用能力**
+							* 「学会算法模板」≠「学会算法」 (大佬除外)
+							3. **熟悉比赛的感觉（<del>提前习惯赛时罚坐</del>)**
+							* [Acwing周赛](https://www.acwing.com/activity/1/competition/)、[牛客系列比赛](https://ac.nowcoder.com/acm/contest/vip-index)、[Codeforces](https://codeforces.com/)、[AtCoder](https://atcoder.jp/)、<a href="https://leetcode.cn/contest/" style="color:green">LeetCode周赛</a>
+							* ......各类大赛真题
+						</textarea
+            >
+          </section>
+
+          <section data-markdown>
+            <!--知识体系概论-->
+            <textarea data-template>
+							## 知识体系 ①
+							* 基础算法 <span>&#9749;</span>
+								* 了解算竞中的许多思想与思维
+								* 为进阶内容做铺垫
+								* 模拟、枚举、二分查找/答案、位运算、前缀和与差分、贪心......
+							* 数据结构 <span>&#127794;</span>
+								* 计算机中存储、组织数据的方式
+								* 小到变量、数组，大到线段树、平衡树
+							* 搜索 <span>&#128270;</span>
+								* 对状态空间进行枚举，穷尽所有可能来求解
+								* 深度优先搜索(DFS)、广度优先搜索(BFS)、搜索剪枝与优化
+								* <red>暴力算法、"骗分"的基石</red>
+							
+						</textarea
+            >
+          </section>
+
+          <section data-markdown>
+            <!--知识体系概论-->
+            <textarea data-template>
+							## 知识体系 ②
+							* 字符串 <span>&#128288;</span>
+								* 基于字符串，但常常会与其他版块结合
+								* 字符串匹配问题、子串相关问题、前缀/后缀相关问题......
+								* KMP、字典树(Trie)、Manacher......
+							* 图论 <span>&#127966;</span>
+								* 用图来描述事物之间的某种特定关系，基于图进行求解问题
+								* 最短路、最小生成树、拓扑排序、最近公共祖先LCA......
+							* 动态规划(Dynamic Programming) 
+								* 通过定义状态以及状态之间的转移方程来高效求解问题的方法
+								* 背包DP、线性DP、状压DP、区间DP......
+							* 数学 <span>&#128218;</span>
+								* 更强调以数论、排列组合、概率期望、多项式为代表的离散、具体的数学
+						</textarea
+            >
+          </section>
+
+          <section data-markdown>
+            <!--来看看往届蓝桥杯考了些啥吧-->
+            <textarea data-template>
+							## 来看看往届蓝桥杯考了些啥吧
+							第13届蓝桥杯 B 组 C / C++(非唯一解)
+							* 填空题：A 进制转换、B 枚举<img class="float-right" width="300px" style="position:relative; right: 5%;" src="/slides/lanqiaobei/img/after.jpg">
+							* 程序设计题
+								* C 模拟
+								* D 模拟 <code>+</code> 找规律 
+								* E 贪心
+								* F 二维前缀和<code>(70%) + </code>双指针<code>(100%)</code>
+								* G 动态规划
+								* H 手写哈希 + 搜索
+								* I 动态规划
+								* J 线段树 <code>/</code> 优先队列
+
+							[往届蓝桥杯考点(转载自 CSDN)](https://blog.csdn.net/m0_58367586/article/details/123985357)
+						</textarea
+            >
+          </section>
+
+          <section data-markdown>
+            <!--学习资源推荐(一)-->
+            <textarea data-template>
+							## 学习资源推荐（一）
+							『算法竞赛书籍』
+							* <span>&#127775;</span>《深入浅出算法竞赛(基础篇)》 --洛谷 
+							* <span>&#10071;</span>《算法竞赛进阶指南》 --李煜东
+							* <span>&#10071;</span>《算法竞赛》--罗勇军、郭卫斌 
+
+							『博客<code> & </code>网站』
+							* [OI-Wiki](https://oi-wiki.org/) 
+							* [CodeForces-Tracker](https://cftracker.netlify.app/problems)
+							* [LeetCode-Tracker](https://zerotrac.github.io/leetcode_problem_rating/#/)
+							* ......
+
+							<div class="fragment">
+							
+							> **「学会<code>STFW</code>」**开源的时代，网络积累了大量宝藏资源
+							</div>
+						</textarea
+            >
+          </section>
+
+          <section data-markdown>
+            <!--学习资源推荐(二)-->
+            <textarea data-template>
+							## 学习资源推荐（二）
+							『OJ平台(Online Judge)』
+							* <a href="https://www.luogu.com.cn/">洛谷 &emsp;<img src="/slides/lanqiaobei/img/luogu.png" width= "80px" style="display:inline"></a>
+							* <a href="https://www.acwing.com/">AcWing &emsp;<img src="/slides/lanqiaobei/img/acw.png" width="60px" style="display:inline"></a>
+							<img style="position:relative; right: 18%;" class="float-right" width="300px" src="/slides/lanqiaobei/img/achx.jpg">
+							<!-- * [杭电OJ](https://acm.hdu.edu.cn/) &emsp;<a href="https://acm.hdu.edu.cn/"><img src="/slides/lanqiaobei/img/hdoj.png" width="170px" style="display:inline"></a> -->
+							* 其余滴<span> &#10145; </span> <a href="#/2/2">[修炼之路]</a>
+
+							如何使用？
+							* [梦开始的地方](https://www.luogu.com.cn/problem/P1001)
+							* [AC.cpp](/slides/lanqiaobei/demos/AC.cpp)
+							* [WA.cpp](/slides/lanqiaobei/demos/WA.cpp)
+							* [TLE.cpp](/slides/lanqiaobei/demos/TLE.cpp)
+						</textarea
+            >
+          </section>
+        </section>
+
+        <section>
+          <!--技巧篇-->
+          <section>
+            <div>
+              <div class="center middle">
+                <div style="width: 100%">
+                  <h1 id="_1" class="text-2xl mt-2 font-sans">
+                    <del>速成</del>技巧篇
+                  </h1>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section data-markdown>
+            <!--成长没有捷径，但蓝桥杯拿奖或许......-->
+            <textarea data-template>
+							## 成长没有捷径，但蓝桥杯拿奖或许......
+							扎实常用算法与思维，拒绝 <green>Useless Algorithm</green>
+							* 『**基础算法和思维**』
+								* 枚举、模拟、贪心、二分、双指针、前缀和、位运算
+							* 『**图论**』 
+								* 最短路(Dijkstra/Floyd)、最小生成树(Kruskal)
+							* 『**数据结构**』
+								* 栈、队列、优先队列、并查集
+								<img style="position:absolute; bottom: 1%; right:10%" class="float-right" width="350px" src="/slides/lanqiaobei/img/dl.jpg">
+							* 『**数学**』
+								* 质数筛、快速幂
+							* 『**DP**』
+								* 背包问题、线性DP
+							* **<red>二进制枚举、DFS、BFS</red>**
+						</textarea
+            >
+          </section>
+
+          <section data-markdown>
+            <!--C++已经都为你实现了-->
+            <textarea data-template>
+							## 强大的C++
+							STL封装了大量的函数: <del>直接调用！抄就完事了</del>
+							* 容器：栈、队列、优先队列、哈希表......
+							* 算法：排序、查找、翻转、求最值、去重......
+
+							[C++STL总结](https://blog.csdn.net/u010183728/article/details/81913729)
+
+							>	* 不要光背函数，能熟练运用的才是你的！<br>
+							>	* 不同C++版本的STL库会有些许增减
+							>   * <del>今年貌似支持 C++14 了</del>
+
+							<img class="center" width="260px" src="/slides/lanqiaobei/img/cv.jpg">
+						</textarea
+            >
+          </section>
+
+          <section data-markdown>
+            <!--暴力出奇迹-->
+            <textarea data-template>
+							## 暴力出奇迹
+							第十三届蓝桥杯C/C++ B组 F题
+							<img width="800px"  src="/slides/lanqiaobei/img/bff.jpg">
+							* 暴力算法(Brute Force)
+							* 学好枚举、搜索以及二进制枚举
+							* 每题都打个暴力分，加起来非常可观
+							> “ 骗分过样例，暴力出省一 ” 是真的！
+						</textarea
+            >
+          </section>
+
+          <section data-markdown>
+            <!--关于骗分这件事-->
+            <textarea data-template>
+							## 关于骗分这件事
+							[骗分导论----蒟蒻的宝书](https://www.luogu.com.cn/blog/Misaka-Mikoto/AK-IOI)
+							* "无解则输出-1"、"输出 YES 或者 NO"
+							* 手足无策时，不如打打表找找规律看看？
+							* 做一个贪心的人----贪心算法
+							* 再不行......按格式随便输出吧，样例也行！
+							<div class="fragment">
+								
+								> “ 不骗分，是骗分的最高境界。”
+							</div>
+						</textarea
+            >
+          </section>
+        </section>
+
+        <section>
+          <!--心态篇-->
+          <section>
+            <div>
+              <div class="center middle">
+                <div style="width: 100%">
+                  <h1 id="_1" class="text-2xl mt-2 font-sans">心态篇</h1>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section data-markdown>
+            <!--血淋淋的现实-->
+            <textarea data-template>
+							## 血淋淋的现实
+							* 比赛四小时，罚坐三小时
+							* 做题没有思路，上课也听不懂
+							* 代码又长又臭，低级 bug 频频出现
+							* 一道题做了一天也没搞定，一debug就是一下午
+							* ......
+
+							**<span><green>&#11014;</green></span><u>这些甚至可能会贯穿始终，因为算法与数据结构本身就很<red>难</red></u>**
+							<img style="position:relative; right:10%" class="float-right" width="310px" src="/slides/lanqiaobei/img/xieti.jpg">
+
+							**「一些小小的建议」**
+							* 踏踏实实刷题，以百千计量
+							* “合理”运用题解 
+							* 多与同伴进行交流
+							* 以及 ......
+						</textarea
+            >
+          </section>
+
+          <section data-markdown>
+            <!--坚持-->
+            <textarea data-template>
+							## 坚持
+							> 无论是热爱，还是为了奖项，**厚实**的刷题量才是成功的关键
+							
+							在这里付出<red>一定</red>会有回报
+							* 与中国乃至世界的大神们同台竞技
+							* 开阔视野，提升思维能力、<u>**自学能力**</u>
+							* 锻炼过硬的代码能力 ---- 思路实现 + debug能力
+							* 对计算机专业课有着更加深刻的理解
+
+							<img class="center fragment" width="255px" src="/slides/lanqiaobei/img/qc.jpg">
+						</textarea
+            >
+          </section>
+        </section>
+
+        <section>
+          <!--资源汇总篇-->
+          <section>
+            <div>
+              <div class="center middle">
+                <div style="width: 100%">
+                  <h1 id="_1" class="text-2xl mt-2 font-sans">资源汇总篇</h1>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section data-markdown>
+            <!--修炼之路 ①-->
+            <textarea data-template>
+							## 修炼之路 ①
+
+							**【基础篇】**
+
+							*   基础算法：排序、二分、高精度、前缀和与差分、双指针算法、位运算、离散化、区间合并、贪心
+							*   数据结构：图的存储『邻接矩阵、邻接表、链式前向星』、(单调)栈、(单调)队列、KMP、Trie树、并查集、堆、手写Hash表
+							*   搜索：基础DFS、基础BFS
+							*   图论：图与树的遍历、拓扑排序、最短路算法、最小生成树、二分图『染色法、匈牙利算法』
+							*   动态规划：记忆化搜索、背包问题、线性DP、区间DP、计数类DP、数位统计DP、状态压缩DP、树形DP
+							*   数学：质数、欧拉函数、快速幂
+						</textarea
+            >
+          </section>
+
+          <section data-markdown>
+            <!--修炼之路 ②-->
+            <textarea data-template>
+							## 修炼之路 ②
+							**【提高篇】**
+
+							*   动态规划：区间DP、计数类DP、数位统计DP、状态压缩DP、树形DP、记忆化搜索、单调队列优化DP、斜率优化DP
+							*   搜索：
+								*   BFS：Flood Fill、最短路模型、多源BFS、最小步数模型、双端队列广搜、双向广搜、A*
+								*   DFS：连通性模型、搜索顺序、剪枝与优化、迭代加深、双向DFS、IDA*
+							*   图论：差分约束、最近公共祖先LCA、有向图的强连通分量、无向图的双连通分量、二分图、欧拉回路和欧拉路径
+							*   高级数据结构：树状数组、线段树、可持久化数据结构、平衡树(Treap)、AC自动机
+							*   数学：扩展欧几里得算法、中国剩余定理、高斯消元、组合计数、容斥原理、博弈论
+						</textarea
+            >
+          </section>
+
+          <section data-markdown>
+            <!--成神之路-->
+            <textarea data-template>
+							## 成神之路
+							**【进阶篇】**
+							* 图论：网络流『最大流、最小割、费用流』、2-SAT、朱刘算法、Prufer编码
+							* 数据结构：Splay、树套树、分块、块状链表、莫队、树链剖分、动态树、Dancing Links、左偏树、后缀数组、后缀自动机、点分治和点分树、CDQ分治、仙人掌
+							* 动态规划：基环树DP、四边形不等式优化、插头DP
+							* 计算几何：二维计算几何基础、凸包、半平面交、最小圆覆盖、三维计算几何基础、三维凸包、旋转卡壳、三角剖分、扫描线、 自适应辛普森积分
+							* 数学：莫比乌斯反演、积性函数、BSGS、FFT、生成函数、Burnside引理和Polya定理、斯特林数、线性基
+							* 搜索：模拟退火、爬山法
+							* 基础算法：启发式合并、manacher算法、最小表示法
+						</textarea
+            >
+          </section>
+
+          <section data-markdown>
+            <!--资源汇总篇-->
+            <textarea data-template>
+							## 一些可能会有帮助的分享
+							<img style="position: relative; right:15%;" class="float-right" width="310px" src="/slides/lanqiaobei/img/dev.jpg">
+							
+							* IDE 
+								* <code>SublimeText 3/4</code> 
+								* <code>VSCode</code>
+								* [FastOlympicCoding](https://github.com/Jatana/FastOlympicCoding)
+							* OJ平台
+								* [洛谷](https://www.luogu.com.cn/)&emsp;[牛客竞赛](https://ac.nowcoder.com/acm/contest/vip-index)&emsp;[AcWing](https://www.acwing.com/)&emsp;[CodeForces](https://codeforces.com/)&emsp;[AtCoder](https://atcoder.jp/)&emsp;[LeetCode](https://leetcode.cn/)&emsp;[HDOJ](https://acm.hdu.edu.cn/)&emsp;[POJ](http://poj.org/)&emsp;[Virtual Judge](https://vjudge.net/)
+							* 书籍
+								* 《深入浅出算法竞赛(基础篇)》 --洛谷学术组
+								* 《算法竞赛进阶指南》 --李煜东
+								* 《算法竞赛》--罗勇军、郭卫斌  
+								* 《算法竞赛入门经典(第2版)》 --刘汝佳
+						</textarea
+            >
+          </section>
+
+          <section data-markdown>
+            <!--资源汇总篇-->
+            <textarea data-template>
+							## 一些可能会有帮助的分享
+							* [第十三届蓝桥杯C/C++大学B组省赛试题](/slides/lanqiaobei/demos/lqb1.pdf)
+							* [第十三届蓝桥杯C/C++大学B组决赛试题](/slides/lanqiaobei/demos/lqb2.pdf)
+							* 网站与工具
+								* [XCPC知识树](https://zhuanlan.zhihu.com/p/454647571)
+								* [OI-Wiki](https://oi-wiki.org/) 
+								* [LeetCode-Tracker](https://zerotrac.github.io/leetcode_problem_rating/#/)
+								* [CodeForces-Tracker](https://cftracker.netlify.app/problems)
+								* [CS Academy -- 图论画图神器](https://csacademy.com/app/graph_editor/)
+								* [算法与数据结构动态可视化](https://visualgo.net/zh)
+								* [洛谷日报](https://www.craft.do/s/N0l80k2gv46Psq)
+							* 谷歌搜索、必应搜索以及强大的互联网
+							* ......
+						</textarea
+            >
+          </section>
+        </section>
+
+        <section>
+          <!--Thanks-->
+          <section>
+            <div>
+              <div class="center middle">
+                <div style="width: 100%">
+                  <h1 id="_1" class="text-2xl mt-2 font-sans">Thanks</h1>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+      </div>
+    </div>
+
+    <script src="/static/reveal/reveal.js"></script>
+    <script src="/static/plugin/notes/notes.js"></script>
+    <script src="/static/plugin/markdown/markdown.js"></script>
+    <script src="/static/plugin/highlight/highlight.js"></script>
+    <script src="/static/plugin/math/math.js"></script>
+    <script>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        width: 1024,
+        height: 768,
+        hash: true,
+        slideNumber: "c/t",
+        center: false,
+        controlsTutorial: false,
+        progress: false,
+        autoAnimateUnmatched: true,
+        autoAnimateEasing: "ease-out",
+        autoAnimateDuration: 0.3,
+        transitionSpeed: "fast",
+
+        katex: {
+          version: "latest",
+          delimiters: [
+            { left: "$$", right: "$$", display: false },
+            { left: "$", right: "$", display: true },
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true },
+          ],
+          ignoredTags: ["script", "noscript", "style", "textarea", "pre"],
+        },
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [
+          RevealMarkdown,
+          RevealHighlight,
+          RevealNotes,
+          RevealMath.KaTeX,
+        ],
+      });
+    </script>
+  </body>
+</html>
