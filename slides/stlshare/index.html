@@ -1,0 +1,609 @@
+<!DOCTYPE html><html class="h-100">
+
+	<head>
+		<base target="_blank">
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<link href="/static/css/tailwind.min.css" rel="stylesheet">
+		<link href="/static/css/base.css" rel="stylesheet">
+		<link rel="stylesheet" href="/static/plugin/highlight/monokai.css">
+		<link href="https://fonts.font.im/css?family=Source+Serif+Pro%7CLato%7CInconsolata" rel="stylesheet" type="text/css">
+		<link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+		<title>C++STL概述</title>
+		<style>
+		.font-sans {
+			font-family: 'Lato', 'SimHei', 'STHeiti', 'SimHei', 'Serif';
+		}
+		.font-serif {
+			font-family: 'Source Serif Pro', 'Songti SC', 'SimSun', 'Serif', serif;
+		}
+		</style>
+		<link rel="stylesheet" href="/static/katex/katex.min.css">
+		<script defer src="/static/katex/katex.min.js"></script>
+		<script defer src="/static/katex/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"></script>
+		<script>
+			document.addEventListener("DOMContentLoaded", function() {
+				renderMathInElement(document.body, {
+				// customised options
+				// &#8226; auto-render specific keys, e.g.:
+				delimiters: [
+					{left: '$$', right: '$$', display: true},
+					{left: '$', right: '$', display: false},
+					{left: '\\(', right: '\\)', display: false},
+					{left: '\\[', right: '\\]', display: true}
+				],
+				// &#8226; rendering keys, e.g.:
+				throwOnError : false
+				});
+			});
+		</script>
+	
+	
+		
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	<link rel="stylesheet" href="/static/reveal/reveal.css">
+	<link rel="stylesheet" href="/static/reveal/theme/simple.css" id="theme">
+	
+	<style>
+	.reveal .slide-number {
+		font-size: 26px;
+		border-radius: 5px;
+		background-color: rgba(0, 0, 0, .3);
+	}
+	
+	.reveal .slides {
+		border: 1.5px #ddd solid;
+		border-radius: 7px;
+		text-align: left;
+		font-weight: 300;
+	}
+	
+	.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+		font-family: 'Lato', 'SimHei', 'STXihei', 'Sans Serif';
+		font-weight: 400;
+	}
+	
+	.reveal p, .reveal li, .reveal center {
+		font-size: 32px;
+		font-family: 'Lato', 'STHeiti', 'SimHei', 'Sans Serif';
+	}
+	
+	.reveal li + li {
+		margin-top: 10px;
+	}
+	
+	.reveal ul {
+		display: block;
+		margin-right: 15px;
+	}
+	
+	.reveal p, .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5 {
+		padding:  0 25px 0 25px;
+	}
+	
+	.reveal table {
+		font-size: 32px;
+		font-family: 'Lato', 'STHeiti', 'SimHei', 'Sans Serif';
+		margin-top: 15px;
+		margin-bottom: 15px;
+	}
+	
+	.reveal th {
+		background-color: #eee;
+	}
+	
+	.reveal tr:nth-child(even) {
+		background-color: #efffff;
+	}
+	
+	.reveal h1,
+	.reveal h2,
+	.reveal h3,
+	.reveal h4,
+	.reveal h5,
+	.reveal h6 {
+		text-align: left;
+		margin: 0 0 20px 0;
+		color: #222; 
+		font-weight: 400;
+		line-height: 1.2;
+		letter-spacing: normal;
+	}
+	
+	
+	
+	.reveal h1 {
+		margin: 0 10 0 10;
+		font-size: 60px;
+	}
+	.reveal .middle h1 {
+		text-align: center;
+	}
+	
+	.reveal h2 {
+		font-size: 48px;
+		/* border-bottom: 2px solid rgb(106, 0, 95); */
+		border-bottom: 2px solid rgb(2, 125, 225);
+		padding-bottom: 5px;
+		padding-top: 20px;
+	}
+	.reveal h3 { font-size: 1.15em; }
+	.reveal h4 { font-size: 1.05em; }
+	
+	.reveal .center {
+		text-align: center;
+	}
+	
+	.reveal .middle {
+		height: 728px;
+		display: flex;
+		align-items: center;
+		width: 100%;
+	}
+	
+	.reveal pre {
+		font-size: 28px;
+		
+		background-color: #eee;
+	
+		border-radius: 3mm;
+		padding: 10px 10px 10px 10px;
+	}
+	
+	.reveal pre code {
+		max-height: none;
+	}
+	
+	.reveal code {
+		font-family: 'Inconsolata', 'STKaiti', 'KaiTi', 'Sans Serif', Monospace;
+	}
+	
+	.reveal .middle blockquote {
+		text-align: center;
+		color: rgb(106, 0, 95);
+		background: none;
+		box-shadow: none;
+	}
+	
+	.reveal .middle blockquote a {
+		color: inherit;
+	}
+	
+	.reveal blockquote p, .reveal blockquote li {
+		font-family: 'Lato', 'STKaiti', 'KaiTi', 'Sans Serif';
+	}
+	
+	section .center {
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	
+	.reveal .author-block {
+		margin: 75px 0 35px 0;
+	}
+	.reveal .author-affiliation img {
+		margin: 15px 0 0 0;
+	}
+	.reveal .author-block p, .reveal .author-affiliation p  {
+		font-family: 'Kaiti', 'STKaiti', 'Serif', 'Times', 'Times New Roman';
+		margin-block-start: 0em;
+		margin-block-end: 0em;
+	}
+	.reveal .author-affiliation {
+		display: inline-block;
+		font-size: 90%;
+	}
+	.reveal hr {
+		border: 10px solid rgba(0, 0, 0, 0);
+	}
+	.reveal li {
+		margin-top: 10px;
+		margin-left: 2rem;
+	}
+	</style>
+	
+	</head>
+	
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				
+				<section> <!-- 封面 -->
+					<div>
+						<div class="center middle">
+							<div style="width:100%"><h1 id="_1">C++ STL <del>速通</del>概述</h1>
+								<p class=" font-serif my-1"><include src="Slides_Author"></include></p>
+								<!-- <div style= "position: relative; top: 4rem;"> -->
+									<!-- <div style= "padding-top: 2rem; padding-bottom: 2rem;">
+										<p class=" font-serif my-1">21级计算机科学与技术&emsp;茅文俊</p>
+									</div> -->
+									<!-- <div class="author-affiliation">
+										<img src="https://tse4-mm.cn.bing.net/th/id/OIP-C.8UfkC6eEQa1jWBEvQdYW9QHaDZ?pid=ImgDet&rs=1" style="display: inline-block; width: 60%; height: auto">
+									</div> -->
+								<!-- </div> -->
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section> <!-- 前置小知识 -->
+					<section>
+						<div>
+							<div class="center middle">
+								<div style="width:100%">
+									<h1 id="_1" class=" text-2xl mt-2 font-sans">
+										一些或许有用的前置小知识👀
+									</h1>
+								</div>
+							</div>
+						</div>
+					</section>
+						
+					<section data-markdown> <!--STL提供的数据类型-->
+						<textarea data-template>
+							## <code>STL</code> 提供的一些简单数据类型
+							* [<code>std::pair\<T, P\></code>](https://zh.cppreference.com/w/cpp/utility/pair)
+
+							<code>
+
+								std::pair<int, int> a = {114, 514};
+								std::pair<long long, double> b = {1LL, 2.5};
+								std::pair<std::pair<int, int>, int> c = {{1919, 810}, 1};
+								std::pair<int, std::vector<int>> d = {1, {}};	
+
+							</code>
+								
+							* 可以通过 <code>.first</code> 与 <code>.second</code> 获取第一、二个数值
+							* [pairdemo.cpp](/slides/stlshare/demos/pairdemo.cpp)
+							<br><br>
+							
+							<div class="fragment">
+
+							* [<code>※std::tuple\<T, P, ...\></code>](https://zh.cppreference.com/w/cpp/utility/tuple)
+							* 可以将多个数据类型复合
+							* 通过<code>std::get<>()</code>获取数据
+							* \......
+							</div>
+						</textarea>
+					</section>
+
+					<section data-markdown> <!--迭代器入门-->
+						<textarea data-template>
+							## 迭代器入门
+							回想一下我们是如何用指针遍历数组和链表的
+							<img src="/slides/stlshare/img/mmsd.gif" width= "70px" style="display:inline">
+							<div class="fragment">
+								
+							* <code>*(a + i)</code> 和 <code>node = node->next</code>
+							</div>
+
+							<div class="fragment">
+								
+							* 多一种数据结构，可能就会多一种遍历方式......
+							</div>
+
+							<div class="fragment">
+								
+							* 定义$n$个需要遍历操作的函数 <code>func</code>，那如果有$n$个 STL 容器，岂不是要函数重载 $n \times n$次😰
+							</div>	
+							<br>
+
+							<div class="fragment">
+								
+							* 因此每种 STL 容器都提供了迭代器（[iterator](https://oi-wiki.org/lang/csl/iterator/)）
+							* 一种对『遍历容器操作』的<red>抽象封装</red>
+							* 操作与指针类似
+							* 遵循下标从 0 开始和左闭右开的假定
+							* [iterator.cpp](/slides/stlshare/demos/iterator.cpp)
+							</div>							
+							
+						</textarea>
+					</section>
+
+					<section data-markdown> <!--auto与增强for-->
+						<textarea data-template>
+							## <code>auto</code> 与 增强 <code>for</code>
+							> 🤡同学：我是懒🐶，<blue><code>std::STL容器::iterator</code></blue>怎么这么长<br>
+							遍历容器的 <code>for循环</code> 根本不想写啊！！！
+
+							<div class="fragment">
+
+							* <code>C++11</code> 提供了 <code>auto</code>，可以自动推导数据类型💡
+
+							<code>
+
+								std::vector<int> b{1, 2, 3};
+								auto a = b; // a 是 b 的一份拷贝
+								auto it = a.begin();
+								auto c; // Error！auto 声明的变量必须初始化
+							</code>
+							</div>
+
+							<div class="fragment">
+
+							* 还提供了增强 <code>for</code> 循环💫
+
+							<code>
+
+								std::vector<int> a{0, 1, 2, 3};
+								for (auto x : a) {
+									std::cout << x << " ";
+								}
+							</code>
+							</div>
+						</textarea>
+					</section>
+
+					<section data-markdown> <!--std::function 和 Lambda 函数-->
+						<textarea data-template>
+							## <code>std::function 与 Lambda</code> 函数
+
+							在 <code>C++11</code> 后，我们还能将函数定义成一个变量，以及定义匿名函数。
+
+							* 回想一下我们是如何重载函数的❓
+								<div class="fragment">
+
+								* 返回类型 + 参数列表
+								</div>
+							<div class="fragment">
+
+							* 依据这俩，就可以定义函数类型变量啦<br>
+							<code>std::funcition\<T(P args...)\> <br> e.g. <green>std::function\<int(int, double)\></green> func = ...;</code>
+							<br><br>
+							</div>
+							
+							<div class="fragment">
+							
+							* 来简单定义一个 <code>Lambda</code> 函数：
+							
+							<code>
+
+								[捕获列表](参数列表) {
+									函数体
+								}
+							</code>
+							</div>
+							<div class="fragment">
+
+							* [func.cpp](/slides/stlshare/demos/func.cpp)
+							</div>
+						</textarea>
+					</section>
+
+				</section>
+
+				<section> <!-- STL 容器 -->
+					<section>
+						<div>
+							<div class="center middle">
+								<div style="width:100%">
+									<h1 id="_1" class="text-2xl mt-2 font-sans">
+										<code>STL</code> 介绍
+									</h1>
+									<p id="_1" class="font-serif my-1">
+										<del>正片开始</del>
+									</p>
+								</div>
+							</div>
+						</div>
+					</section>
+
+					<section data-markdown> <!--为什么要用 STL 容器-->
+						<textarea data-template>
+							## 为什么要用 <code>STL</code> 容器 🤔 ?
+							* 下面是一份来自 <code>ChatGpt</code> 的解答
+							<div class="fragment">
+								<img src="/slides/stlshare/img/stladv.png" width="800px">	
+							</div>
+						</textarea>
+					</section>
+
+					<section data-markdown> <!--vector1-->
+						<textarea data-template>
+							## <code>std::vector</code>
+							> **一道有故事的题目**💩：<br>有 $n$ 家店，每家店有 $k$ 个菜，给定其价格，求所有菜中满足条件的最优值，其中 $1 \le n,k \le 10^5,\sum{k}\le 10 ^ 5$。
+							<div class="fragment">
+
+							* [一份把我电脑干重启两次的代码](/slides/stlshare/demos/Carray.cpp)
+
+							</div>
+							<div class="fragment">
+								
+							* 如果我们能动态操控数组大小就好了......
+
+							</div>
+							<div class="fragment">
+
+							* 若能封装在一个黑盒里，其提供了很多接口函数供我们使用，而不用管内部实现......
+
+							</div>
+							<div class="fragment">
+								
+							* 最好还能随时复制份新的，不用一个个拷贝，内存还不会泄露 !
+							
+							</div>
+							<br>
+							<div class="fragment">
+
+							* <code>std::vector</code> 因此就诞生了 !
+
+							</div>
+							
+						</textarea>
+					</section>
+
+					<section data-markdown> <!--vector2-->
+						<textarea data-template>
+							## <code>STL容器</code>
+							* <code>std::vector</code>『支持动态更新大小的<del>数组</del>向量』<img src="/slides/stlshare/img/qushi.jpg" width="260px" style="position:absolute;right:13%;">
+							* <code>std::array </code>『固定大小的数组』
+							* <code>std::stack </code>『先进后出的栈』
+							* <code>std::queue </code>『先进先出的队列』
+							* <code>std::deque </code>『双端队列』
+							* <code>std::string</code>『字符串』
+							* <code>std::map 与 std::multimap</code>『有序键值对容器』
+							* <code>std::set 与 std::multiset</code>『已排序集』
+							* <code>std::unordered_map </code>『无序键值对容器』
+							* <code>std::unordered_set </code>『无序集』
+							* <code>std::priority_queue</code>『优先队列』
+							* <code>std::bitset</code>『存储 0/1 的大小不可变容器』
+						</textarea>
+					</section>
+					
+					<section data-markdown> <!--STL算法-->
+						<textarea data-template>
+							## 一些简单但好用的 <code>STL</code> 算法 👍
+							* <code>std::iota</code>
+							* <code>std::fill</code>
+							* <code>std::accmulate</code>
+							* <code>std::max_element / std::min_element</code>
+							* <code>std::sort</code>
+							* <code>std::unique</code>
+							* <code>std::reverse</code>
+							* <code>std::next_permutation / std::prev_permutation</code>
+							* <code>std::lower_bound</code>
+							* <code>std::upper_bound</code>
+							* <code>std::shuffle、std::remove_if、std::count_if、std::partition、集合运算......</code>
+						</textarea>
+					</section>
+					
+					<section data-markdown> <!--小列两题-->
+						<textarea data-template>
+							## 小列两题 😴
+							* [二叉树的层序遍历](https://leetcode.cn/problems/binary-tree-level-order-traversal/description/) （[双数组](https://paste.ubuntu.com/p/BdgTkVTtzc/) | [queue](https://paste.ubuntu.com/p/hzqgXs4ykF/) | [pair](https://paste.ubuntu.com/p/KCxWdCYh9H/)）
+							* [Adding Reversed Numbers](https://www.educoder.net/tasks/31790/819313/e2fpzu7hk53l?coursesId=31790) （[CODE](/slides/stlshare/demos/stringPyCpp.cpp)）
+							* [两数之和](https://leetcode.cn/problems/two-sum/description/)
+							* [同构字符串](https://leetcode.cn/problems/isomorphic-strings/description/)
+							* [和为 k 的子数组](https://leetcode.cn/problems/QTMn0o/description/)
+							* [两个数组的交集](https://leetcode.cn/problems/intersection-of-two-arrays/description/)
+							* [合并果子](https://www.luogu.com.cn/problem/P1090) （[CODE](/slides/stlshare/demos/heap.cpp)）
+							* [全排列](https://leetcode.cn/problems/permutations/description/)
+							* [整数删除 —— 「2023 🏀 杯 C / C++ B 组 H 题」](https://www.dotcpp.com/oj/problem3155.html?sid=11752777&lang=1#editor) （[CODE](/slides/stlshare/demos/Hac.cpp)）
+						</textarea>
+					</section>
+
+				</section>		
+				
+
+				<section> <!--Some Tips-->
+					<section>
+						<div>
+							<div class="center middle">
+								<div style="width:100%">
+									<h1 id="_1" class=" text-2xl mt-2 font-sans">
+										<code>Some Tips</code>
+									</h1>
+								</div>
+							</div>
+						</div>
+					</section>
+					
+					<section data-markdown> <!--Some Tips1-->
+						<textarea data-template>
+							## <code>Some Tips</code>
+							> <code>Y</code>同学：你这到处都加上 <code>std::</code> 不烦么 ?
+
+							<div class="fragment">
+
+							* 尽量避免代码中加上 <code>using</code>，尤其是头文件（不过算竞问题不大
+							* 加上 <code>std::</code> 可以避免命名冲突
+							* [<code>Google C++ Style Guide</code>](https://google.github.io/styleguide/cppguide.html)
+							</div>
+
+							<div class="fragment">
+
+							> <code>R</code>同学：<code>STL</code> 内容这么多怎么学，我记不下来啊 !
+							</div>
+
+							<div class="fragment">
+
+							* [<code>cpp-reference</code>](https://zh.cppreference.com)、[<code>OI-Wiki</code>](https://oi-wiki.org/lang/csl/container/)
+							* <code>ChatGpt</code>
+							* <red>**实战 + 学习别人代码 → 成为自己的 <code>vocabulary</code>**</red>
+							* <red>**大部分 <code>STL</code> 算法能自己实现才是最重要的 !**</red>
+							</div>
+
+						</textarea>
+					</section>
+
+					<section data-markdown> <!--Some Tips2-->
+						<textarea data-template>
+							## <code>Some Tips</code>
+							> <code>A</code>同学：自己实现那还要啥 <code>STL</code> !
+							</div>
+
+							<div class="fragment">
+
+							* <code>STL algorithms can make code more expressive</code>
+							  * <code>Raising levels of abstraction</code>
+							  * <code>Sometimes, it can be spectacular</code>
+							<code>&emsp;**「From CppCon 2018」**</code>
+							
+							<img class="center fragment" width="300px" src="/slides/stlshare/img/AC.jpg">
+						</textarea>
+					</section>
+
+				</section>
+				
+				<section> <!--Thanks-->
+					<section>
+						<div>
+							<div class="center middle">
+								<div style="width:100%">
+									<h1 id="_1" class=" text-2xl mt-2 font-sans">
+										Thanks
+									</h1>
+								</div>
+							</div>
+						</div>
+					</section>
+					
+				</section>
+
+			</div>
+		</div>
+
+
+
+
+
+		<script src="/static/reveal/reveal.js"></script>
+		<script src="/static/plugin/notes/notes.js"></script>
+		<script src="/static/plugin/markdown/markdown.js"></script>
+		<script src="/static/plugin/highlight/highlight.js"></script>
+		<script src="/static/plugin/math/math.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				width: 1024, height: 768,
+				hash: true,
+				slideNumber: 'c/t',
+				center: false,
+				controlsTutorial: false,
+				progress: false,
+				autoAnimateUnmatched: true,
+				autoAnimateEasing: 'ease-out',
+				autoAnimateDuration: 0.3,
+				transitionSpeed: 'fast',
+
+				katex: {
+					version: 'latest',
+					delimiters: [
+					{left: '$$', right: '$$', display:  false},
+					{left: '$', right: '$', display: true},
+					{left: '\\(', right: '\\)', display: false},
+					{left: '\\[', right: '\\]', display: true}
+					],
+					ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+				},
+				
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX ]
+			});
+		</script>
+	</body>
+</html>
